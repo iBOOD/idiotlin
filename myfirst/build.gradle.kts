@@ -17,6 +17,8 @@ dependencies {
     fun ktor(suffix: String) = "io.ktor:ktor$suffix:${Versions.ktor}"
     implementation(ktor("-server-netty"))
     implementation(ktor("-serialization"))
+    implementation("org.kodein.di:kodein-di-framework-ktor-server-jvm:${Versions.kodein}")
+    implementation("org.kodein.di:kodein-di-generic-jvm:${Versions.kodein}")
 
     implementation("io.github.microutils:kotlin-logging:${Versions.klogging}")
     implementation("ch.qos.logback:logback-classic:${Versions.logback}")
