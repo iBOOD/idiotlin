@@ -16,3 +16,4 @@ Code repository for the live demo "Idiomatic Kotlin Microservices" given at the 
 # Gradle commands
 
 * `./gradlew detekt` ... run static code analysis
+* `./gradlew dependencyUpdates` ... check if all dependencies are up2date

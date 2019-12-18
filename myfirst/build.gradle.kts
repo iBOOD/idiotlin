@@ -53,7 +53,7 @@ tasks {
     }
 
     withType<DependencyUpdatesTask> {
-        val rejectPatterns = listOf("alpha", "beta", "eap").map { qualifier ->
+        val rejectPatterns = listOf("alpha", "beta", "eap", "rc").map { qualifier ->
             Regex("(?i).*[.-]$qualifier[.\\d-]*")
         }
         resolutionStrategy {
