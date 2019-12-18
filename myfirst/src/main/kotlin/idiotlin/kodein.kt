@@ -6,6 +6,7 @@ import org.kodein.di.generic.singleton
 
 fun applicationKodein() = Kodein {
     bind<EntityRepository>() with singleton { ExposedEntityRepository() }
+//    bind<EntityService>() with singleton { EntityService(instance()) }
 //    import(otherModule())
 }
 

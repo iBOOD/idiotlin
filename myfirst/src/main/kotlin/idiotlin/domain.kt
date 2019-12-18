@@ -13,7 +13,7 @@ data class Entity(
 ) {
     companion object {
         val dummy = Entity(
-            id = UUID.randomUUID(),
+            id = UUID.fromString("00000000-0000-0000-0000-000000000000"),
             name = "dummy entity"
         )
     }

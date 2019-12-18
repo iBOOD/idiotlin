@@ -11,7 +11,6 @@ import io.ktor.routing.routing
 import io.ktor.serialization.serialization
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
-import kotlinx.serialization.Serializable
 import mu.KotlinLogging.logger
 import org.kodein.di.Kodein
 import org.kodein.di.generic.instance
@@ -36,25 +35,8 @@ fun Application.main(kodein: Kodein) {
 
     routing {
         get("/") {
-            // TODO make json
-            log.info { "Got request: GET /" }
+            log.debug { "Route: GET /" }
             call.respond(HttpStatusCode.OK, GetResponse(repository.all().map { it.toEntityDto() }))
         }
     }
 }
-
-fun Entity.toEntityDto() = EntityDto(
-    id = id.toString(),
-    name = name
-)
-
-@Serializable
-data class GetResponse(
-    val entities: List<EntityDto>
-)
-
-@Serializable
-data class EntityDto(
-    val id: String,
-    val name: String
-)

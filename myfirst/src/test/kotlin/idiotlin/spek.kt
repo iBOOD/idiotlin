@@ -5,25 +5,33 @@ import assertk.assertThat
 import assertk.assertions.isEqualTo
 import io.ktor.http.ContentType
 import io.ktor.http.HttpMethod
+import io.ktor.http.HttpStatusCode
+import io.ktor.server.testing.TestApplicationEngine
 import io.ktor.server.testing.TestApplicationResponse
 import io.ktor.server.testing.contentType
 import io.ktor.server.testing.handleRequest
+import io.ktor.server.testing.withTestApplication
 import org.json.JSONObject
+import org.kodein.di.Copy
+import org.kodein.di.Kodein
 import org.skyscreamer.jsonassert.JSONAssert
 import org.skyscreamer.jsonassert.JSONCompareMode
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.gherkin.Feature
 
-object KtorTest : Spek({
-    Feature("Ktor") {
-        Scenario("Get / returns dummy entity") {
+object KtorSpec : Spek({
+    Feature("Ktor Endpoint") {
+        Scenario("Root endpoint returns preconfigured dummy entity") {
             lateinit var response: TestApplicationResponse
+
             When("GET /") {
                 withKtor {
                     response = handleRequest(HttpMethod.Get, "/").response
                 }
             }
-            Then("it should return the first item") {
+
+            Then("return 200 OK and JSON dummy entity") {
+                assertThat(response.status()).isEqualTo(HttpStatusCode.OK)
                 assertThat(response.contentType().withoutParameters()).isEqualTo(ContentType.Application.Json)
                 assertThat(response).contentEqualsJson("""{
                     "entities": [
@@ -37,6 +45,12 @@ object KtorTest : Spek({
         }
     }
 })
+
+fun withKtor(engineCode: TestApplicationEngine.() -> Unit) {
+    withTestApplication({
+        main(Kodein { extend(applicationKodein(), copy = Copy.All) })
+    }, engineCode)
+}
 
 fun Assert<TestApplicationResponse>.contentEqualsJson(expectedJson: String) {
     given {
