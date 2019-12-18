@@ -1,35 +1,17 @@
-# nice to have:
-# - unused params defined in interface
-# - too many LoC in file
-# - too many LoC in block
-# - too many properties (vals)
-
 build:
   maxIssues: 0
 
 processors:
   active: true
-  exclude:
-  # - 'DetektProgressListener'
-  # - 'FunctionCountProcessor'
-  # - 'PropertyCountProcessor'
-  # - 'ClassCountProcessor'
-  # - 'PackageCountProcessor'
-  # - 'KtFileCountProcessor'
 
 console-reports:
   active: true
   exclude:
-    #  - 'ProjectStatisticsReport'
-    #  - 'ComplexityReport'
-    #  - 'NotificationReport'
-    #  - 'FindingsReport'
     - 'FileBasedFindingsReport'
-  #  - 'BuildFailureReport'
 
 comments:
   active: true
-  excludes: "**/test/**,**/androidTest/**,**/*.Test.kt,**/*.Spec.kt,**/*.Spek.kt"
+  excludes: "**/test/**,**/*.Test.kt,**/*.Spec.kt,**/*.Spek.kt"
   CommentOverPrivateFunction:
     active: false
   CommentOverPrivateProperty:
