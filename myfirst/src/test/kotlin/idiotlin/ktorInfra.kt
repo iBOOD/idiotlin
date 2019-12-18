@@ -17,6 +17,6 @@ fun withKtor(
             kodein(this@withTestApplication)
         }
         setup(kodeinInstance)
-        main(kodeinInstance, "jdbc:h2:mem:test")
+        main(kodeinInstance)
     }, testCode)
 }

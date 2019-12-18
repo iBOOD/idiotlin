@@ -2,47 +2,59 @@ package idiotlin
 
 import io.ktor.application.Application
 import io.ktor.application.call
-import io.ktor.http.ContentType
-import io.ktor.response.respondText
+import io.ktor.application.install
+import io.ktor.features.ContentNegotiation
+import io.ktor.http.HttpStatusCode
+import io.ktor.response.respond
 import io.ktor.routing.get
 import io.ktor.routing.routing
+import io.ktor.serialization.serialization
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
+import kotlinx.serialization.Serializable
 import mu.KotlinLogging.logger
-import org.jetbrains.exposed.sql.Database
-import org.jetbrains.exposed.sql.SchemaUtils
-import org.jetbrains.exposed.sql.StdOutSqlLogger
-import org.jetbrains.exposed.sql.addLogger
-import org.jetbrains.exposed.sql.transactions.transaction
 import org.kodein.di.Kodein
 import org.kodein.di.generic.instance
 
 private val log = logger {}
 
 fun startKtor() {
-
-    val server = embeddedServer(factory = Netty, port = 8080) {
-        main(applicationKodein(), "jdbc:h2:file:idiotlinDb")
+    val ktor = embeddedServer(factory = Netty, port = 8080) {
+        main(applicationKodein())
     }
-    log.info { "Starting server ..." }
-    server.start(wait = true)
+    ktor.start(wait = true)
 }
 
-fun Application.main(kodein: Kodein, databaseUrl: String) {
-    connectDb(databaseUrl)
+fun Application.main(kodein: Kodein) {
+    install(ContentNegotiation) {
+        serialization()
+    }
 
-    val service by kodein.instance<Repository>()
+    connectToDatabase()
+    val repository by kodein.instance<EntityRepository>()
+    repository.insert(Entity.dummy)
+
     routing {
         get("/") {
-            call.respondText(service.all().joinToString { it.name }, ContentType.Text.Plain)
+            // TODO make json
+            log.info { "Got request: GET /" }
+            call.respond(HttpStatusCode.OK, GetResponse(repository.all().map { it.toEntityDto() }))
         }
     }
 }
 
-private fun connectDb(url: String) {
-    Database.connect(url = url, driver = "org.h2.Driver", user = "root", password = "")
-    transaction {
-        addLogger(StdOutSqlLogger)
-        SchemaUtils.create(EntityTable)
-    }
-}
+fun Entity.toEntityDto() = EntityDto(
+    id = id.toString(),
+    name = name
+)
+
+@Serializable
+data class GetResponse(
+    val entities: List<EntityDto>
+)
+
+@Serializable
+data class EntityDto(
+    val id: String,
+    val name: String
+)

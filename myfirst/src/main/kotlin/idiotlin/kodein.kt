@@ -5,10 +5,10 @@ import org.kodein.di.generic.bind
 import org.kodein.di.generic.singleton
 
 fun applicationKodein() = Kodein {
-    bind<Repository>() with singleton { InMemoryRepository() }
-//    import(boundaryModule())
+    bind<EntityRepository>() with singleton { ExposedEntityRepository() }
+//    import(otherModule())
 }
 
-//private fun boundaryModule(konfig: Konfig) = Kodein.Module(name = "Boundary Module") {
+//fun otherModule() = Kodein.Module(name = "Other Module") {
 //    bind<Clock>() with singleton { SystemClock }
 //}
