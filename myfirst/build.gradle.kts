@@ -18,6 +18,7 @@ dependencies {
     implementation(ktor("-server-netty"))
     implementation(ktor("-serialization"))
 
+    implementation("io.github.microutils:kotlin-logging:${Versions.klogging}")
     implementation("ch.qos.logback:logback-classic:${Versions.logback}")
 
     testImplementation(ktor("-server-test-host")) {
