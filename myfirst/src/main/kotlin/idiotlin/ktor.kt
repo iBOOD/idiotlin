@@ -16,13 +16,13 @@ private val log = logger {}
 
 fun startKtor() {
     val server = embeddedServer(factory = Netty, port = 8080) {
-        mainKodeined(applicationKodein())
+        main(applicationKodein())
     }
     log.info { "Starting server ..." }
     server.start(wait = true)
 }
 
-fun Application.mainKodeined(kodein: Kodein) {
+fun Application.main(kodein: Kodein) {
     val service by kodein.instance<Repository>()
     routing {
         get("/") {

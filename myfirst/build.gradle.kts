@@ -14,15 +14,21 @@ plugins {
 }
 
 dependencies {
+    implementation(kotlin("stdlib-jdk8"))
+    implementation(kotlin("reflect"))
+
     fun ktor(suffix: String) = "io.ktor:ktor$suffix:${Versions.ktor}"
     implementation(ktor("-server-netty"))
     implementation(ktor("-serialization"))
     implementation("org.kodein.di:kodein-di-framework-ktor-server-jvm:${Versions.kodein}")
     implementation("org.kodein.di:kodein-di-generic-jvm:${Versions.kodein}")
-
     implementation("io.github.microutils:kotlin-logging:${Versions.klogging}")
     implementation("ch.qos.logback:logback-classic:${Versions.logback}")
 
+    // TODO mockk?
+    api("com.willowtreeapps.assertk:assertk-jvm:${Versions.assertk}")
+    testImplementation("org.spekframework.spek2:spek-dsl-jvm:${Versions.spek}")
+    testRuntimeOnly("org.spekframework.spek2:spek-runner-junit5:${Versions.spek}")
     testImplementation(ktor("-server-test-host")) {
         exclude(group = "junit", module = "junit")
         exclude(group = "org.jetbrains.kotlin", module = "kotlin-test-junit")
@@ -39,6 +45,9 @@ tasks {
 
 
     withType<Test> {
+        useJUnitPlatform {
+            includeEngines("spek2")
+        }
         testLogging {
             exceptionFormat = TestExceptionFormat.FULL
         }
