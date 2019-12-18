@@ -10,3 +10,9 @@ Code repository for the live demo "Idiomatic Kotlin Microservices" given at the 
 * [Spek](https://www.spekframework.org/) ... Test Framework (JUnit/TestNG)
 * [Detekt](https://github.com/arturbosch/detekt) ... Static Code Analysis (Checkstyle)
 * Gradle Kotlin-DSL
+
+## How to run
+
+# Gradle commands
+
+* `./gradlew detekt` ... run static code analysis

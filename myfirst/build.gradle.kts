@@ -43,7 +43,7 @@ tasks {
 
 
     withType<Detekt> {
-        config.setFrom("src/main/build/detekt.yml")
+        config.setFrom("src/config/detekt.yml")
         source("src/main/kotlin", "src/test/kotlin")
         reports {
             html.enabled = false
