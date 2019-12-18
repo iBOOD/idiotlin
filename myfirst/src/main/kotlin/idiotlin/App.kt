@@ -6,6 +6,3 @@ object App {
         startKtor()
     }
 }
-
-
-fun foo(){}
