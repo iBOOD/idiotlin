@@ -3,6 +3,7 @@
 * [ ] pre-present ad work/meetup
 * [ ] workout step-by-step cheatsheet on paper
 * [ ] add fullFledged master solution (complete CRUD)
+* [ ] ? beamer slides? (could enable/disable code samples for handout)
 
 # Presentation Notes
 
@@ -20,9 +21,11 @@
 
 * CRUD operations (see GitHub solution)
 * Exception Handling
-* Enhanced Test Setup (access to application context)
+* Custom JSON serializer
+* Enhanced Test Setup (override kodein instances)
 * Mockk
-* Application Konfiguration
+* Application Konfiguration (no properties files needed)
+* Swagger + (custom) Kotlin CodeGen
 * kscript ;) instead shell scripts
 
 ## EUR 0.02
@@ -36,3 +39,6 @@ Minus
 * Sometimes feeling pain of paradigm shift when using Java libraries
 * Sometimes missing out some Java libraries
 * Sometimes missing well established coding guidelines / best practices
+
+TBH
+* Personally I'd use TestNG over Spek ;)
