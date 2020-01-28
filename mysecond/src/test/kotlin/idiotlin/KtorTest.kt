@@ -3,13 +3,11 @@ package idiotlin
 import assertk.Assert
 import assertk.assertThat
 import assertk.assertions.isEqualTo
-import assertk.assertions.isNotNull
-import assertk.fail
 import io.ktor.http.HttpMethod
 import io.ktor.http.HttpStatusCode
+import io.ktor.server.testing.TestApplicationResponse
 import io.ktor.server.testing.handleRequest
 import io.ktor.server.testing.withTestApplication
-import org.json.JSONException
 import org.json.JSONObject
 import org.kodein.di.Copy
 import org.kodein.di.Kodein
@@ -39,26 +37,15 @@ class KtorTest {
         }) {
             with(handleRequest(HttpMethod.Get, "/")) {
                 assertThat(response.status()).isEqualTo(HttpStatusCode.OK)
-                assertThat(response.content).isJsonEquals(("""{"models": [{"name":"${model.name}"}]}"""))
+                assertThat(response).contentEqualsJson(("""{"models": [{"name":"${model.name}"}]}"""))
             }
         }
     }
 }
 
-fun Assert<String?>.isJsonEquals(expectedJson: String, mode: JsonMode = JsonMode.Strict) {
+fun Assert<TestApplicationResponse>.contentEqualsJson(expectedJson: String) {
     given {
-        assertThat(it).isNotNull()
-        val json = try {
-            JSONObject(it)
-        } catch (e: JSONException) {
-            fail("Unparsable JSON: <<<$it>>>>")
-        }
-        try {
-            JSONAssert.assertEquals(expectedJson, json, mode.jsonAssertMode)
-        } catch (e: AssertionError) {
-            System.err.println("JSON assertion failed for:\n${json.toString(2)}")
-            throw e
-        }
+        JSONAssert.assertEquals(expectedJson, JSONObject(it.content), JSONCompareMode.NON_EXTENSIBLE)
     }
 }
 

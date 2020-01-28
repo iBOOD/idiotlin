@@ -53,7 +53,9 @@
     1. implement `TestableService`
     1. extend kodein and override instance
     1. rename from `IntegrationTest` to `KtorTest`
-
+1. setup exposed
+    1. create `connectToDatabase()`
+    1. create Table and Repository; wire in kodein (inject repo in service)
 
 ## Outlook
 
