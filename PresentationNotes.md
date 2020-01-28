@@ -11,11 +11,29 @@
 
 1. [1] Give short overview of topics
 1. [1] **Gradle** Kotlin DSL (+detekt)
+1. [3] **TestNG** (+ktor infra, assertk)
 1. [4] **Ktor** returning plain text (+kotlin logging)
-1. [3] **Spek** (+ktor infra, assertk)
 1. [2] **Kodein** (in-memory implementation)
 1. [2] **Serializable** (+ JSONassert)
 1. [5] **Exposed**
+
+## Step-by-step
+
+### Ktor
+
+1. create IntegrationTest
+    * use `withTestApplication`
+    * create `Application.startIdiotlin` in test and reference it
+    * GET / and assert OK => fail
+1. create `App`
+    * add main method
+    * run it
+1. setup ktor
+    * use `embeddedServer`
+    * move `startIdiotlin` to App
+1. finish test
+    * run test again => fail
+    * implement routing/route/get, run test again => success
 
 ## Outlook
 
