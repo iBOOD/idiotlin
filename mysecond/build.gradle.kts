@@ -30,10 +30,13 @@ dependencies {
     implementation("ch.qos.logback:logback-classic:${Versions.logback}")
     implementation("org.jetbrains.exposed:exposed:${Versions.exposed}")
 
+    testImplementation(ktor("server-test-host")) {
+        exclude(group = "junit", module = "junit")
+        exclude(group = "org.jetbrains.kotlin", module = "kotlin-test-junit")
+    }
     testImplementation("org.testng:testng:${Versions.testng}")
     testImplementation("com.willowtreeapps.assertk:assertk-jvm:${Versions.assertk}")
     testImplementation("org.skyscreamer:jsonassert:${Versions.jsonAssert}")
-    testImplementation(ktor("server-test-host"))
 }
 
 tasks {
