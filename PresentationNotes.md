@@ -35,6 +35,21 @@
     * run test again => fail
     * implement routing/route/get, run test again => success
 
+### Kodein
+
+1. setup kodein
+    1. create interface + in-memory implementation
+    1. add `Kodein {}` and bind it
+1. wire beans
+    1. invoke `kodein()` in main method and pass parameter to startUp method
+    1. get instance `by kodein.instance<>()` and hookup list response
+    1. for that initialize content negotation (add `@Serializable`, no DTO conversion)
+1. overridable in tests
+    1. fix test's expected output as simple string
+    1. copy'n'paste `Assert<String?>.isJsonEquals`
+    1. fix implementation to return wrapped response (containing list)
+    1. adapt test, rerun => success
+
 ## Outlook
 
 * CRUD operations (see GitHub solution)
