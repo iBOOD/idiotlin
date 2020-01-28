@@ -11,7 +11,7 @@
 
 1. [1] Give short overview of topics
 1. [1] **Gradle** Kotlin DSL (+detekt)
-1. [3] **TestNG** (+ktor infra, assertk)
+1. [3] ~~Spek~~ **TestNG** (+ktor infra, assertk)
 1. [4] **Ktor** returning plain text (+kotlin logging)
 1. [2] **Kodein** (in-memory implementation)
 1. [2] **Serializable** (+ JSONassert)
@@ -56,6 +56,7 @@
 1. setup exposed
     1. create `connectToDatabase()`
     1. create Table and Repository; wire in kodein (inject repo in service)
+    1. create `ExposedModelRepositoryTest`
 
 ## Outlook
 
