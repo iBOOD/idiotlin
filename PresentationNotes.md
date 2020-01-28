@@ -44,11 +44,16 @@
     1. invoke `kodein()` in main method and pass parameter to startUp method
     1. get instance `by kodein.instance<>()` and hookup list response
     1. for that initialize content negotation (add `@Serializable`, no DTO conversion)
-1. overridable in tests
+1. JSON response
     1. fix test's expected output as simple string
     1. copy'n'paste `Assert<String?>.isJsonEquals`
     1. fix implementation to return wrapped response (containing list)
     1. adapt test, rerun => success
+1. overridable in tests
+    1. implement `TestableService`
+    1. extend kodein and override instance
+    1. rename from `IntegrationTest` to `KtorTest`
+
 
 ## Outlook
 
