@@ -72,8 +72,5 @@ tasks {
             }
         }
         checkForGradleUpdate = true
-        outputFormatter = "json"
-        outputDir = "build/reports"
-        reportfileName = "dependencyUpdates"
     }
 }
