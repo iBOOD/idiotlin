@@ -64,7 +64,7 @@ interface Service {
     fun readAll(): List<Model>
 }
 
-class DummyService(
+class ServiceImpl(
     private val repo: ModelRepository
 ) : Service {
     override fun readAll() = repo.fetchAll()
@@ -72,12 +72,11 @@ class DummyService(
 
 fun kodein() = Kodein {
     bind<ModelRepository>() with singleton { ExposedModelRepository() }
-    bind<Service>() with singleton { DummyService(instance()) }
+    bind<Service>() with singleton { ServiceImpl(instance()) }
 }
 
-
 fun connectToDatabase(dbUrl: String = "jdbc:h2:mem:idiotlinDb;DB_CLOSE_DELAY=-1"): Database {
-    log.info { "Connecting to database" }
+    log.info { "Connecting to database: $dbUrl" }
     val db = Database.connect(url = dbUrl, driver = "org.h2.Driver")
     transaction {
         SchemaUtils.create(ModelTable)
