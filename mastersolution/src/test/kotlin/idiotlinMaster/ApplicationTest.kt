@@ -10,17 +10,17 @@ import io.ktor.server.testing.TestApplicationEngine
 import io.ktor.server.testing.handleRequest
 import io.ktor.server.testing.setBody
 import io.ktor.server.testing.withTestApplication
+import org.kodein.di.Copy
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
 import org.testng.annotations.Test
 
-// full integration test
 @Test
 class ApplicationTest {
 
-    private val jackson = jacksonObjectMapper()
     private val model = Model.any()
+    private val jackson = jacksonObjectMapper()
 
     fun `When get all models Then return 200 and empty list`() = withKtor {
         with(handleRequest(HttpMethod.Get, "/")) {
@@ -35,6 +35,7 @@ class ApplicationTest {
             setBody("""{"name": "${model.name}"}""")
         }) {
             assertThat(response.status()).isEqualTo(HttpStatusCode.OK)
+
             val dto = jackson.readValue<ModelDto>(response.content ?: "")
             assertThat(dto).isEqualTo(ModelDto(
                 id = dto.id,
@@ -44,10 +45,11 @@ class ApplicationTest {
     }
 
     private fun withKtor(code: TestApplicationEngine.() -> Unit) {
-        withDb {
-            withTestApplication({
-                ktor()
-            }, code)
-        }
+        withTestApplication({
+            ktor(Kodein {
+                extend(kodeinConfig(), copy = Copy.All)
+                bind<ModelRepository>(overrides = true) with instance(InMemoryModelRepository())
+            })
+        }, code)
     }
 }

@@ -12,6 +12,14 @@ import java.util.concurrent.atomic.AtomicInteger
 val ANY_ID: UUID = UUID.fromString("00000000-0000-0000-0000-000000000000")
 val SOME_ID: UUID = UUID.fromString("11111111-2222-3333-1337-000000000001")
 
+class InMemoryModelRepository() : ModelRepository {
+    private val models = mutableListOf<ModelDbo>()
+    override fun getAll() = models
+    override fun create(model: ModelDbo) {
+        models += model
+    }
+}
+
 fun Assert<String?>.isEqualJson(expectedJson: String) {
     given {
         JSONAssert.assertEquals(expectedJson, it, JSONCompareMode.NON_EXTENSIBLE)
