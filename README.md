@@ -1,12 +1,13 @@
 # Idiotlin
 
-Code repository for the live demo "Idiomatic Kotlin Microservices" given at the [FOSDEM 2020](https://fosdem.org/2020/schedule/event/kotlin_idiomatic_microservices/) conference.
+This repository contains the source code for the live demo "*Idiomatic Kotlin Microservices*" given at the [FOSDEM 2020](https://fosdem.org/2020/schedule/event/kotlin_idiomatic_microservices/) conference.
+You will find the written code during the talk in the `execution/` directory, and a slightly more sophisticated solution of the same in the `mastersolution/` directory.
 
 ## Techstack
 
 * [Ktor](https://ktor.io/) ... Web Framework (Spring Boot)
 * [Kodein](https://kodein.org/) ... Dependency Injection (Spring Framework)
-* [kotlin-serialization](https://github.com/Kotlin/kotlinx.serialization) ... JSON serializer (Jackson)
+* [kotlin-serialization](https://github.com/Kotlin/kotlinx.serialization) ... JSON serializer (Jackson/Gson)
 * [Exposed](https://github.com/JetBrains/Exposed) ... Persistence Manager (JPA, Hibernate)
 * ~~[Spek](https://www.spekframework.org/)~~ [TestNG](https://testng.org) ... Test Framework (JUnit/TestNG)
 * [kotlin-logging](https://github.com/MicroUtils/kotlin-logging) ... Logging Facade (Slf4j)
@@ -22,13 +23,14 @@ Code repository for the live demo "Idiomatic Kotlin Microservices" given at the 
 
 # Outlook
 
+What else could have been done to make this demo a full fledged application:
+
 * Full CRUD operations
 * Exception Handling
 * Application Konfiguration (no more properties files)
-* `Model.Companion.testInstance()`, `Model.toDto()`
-* `kodein.allInstances<Type>()`
-* Custom JSON serializer (Jackson/Gson)
-* Mockk
+* More sophisticated Kodein usage (`kodein.allInstances<Type>()`)
+* Custom JSON serializer (also for Jackson/Gson)
+* More sophisticated test setup (Mockk)
 * OpenAPI/Swagger + (custom) Kotlin Code Generation
 * KScript ;) instead of shell scripts
 
@@ -45,7 +47,3 @@ Code repository for the live demo "Idiomatic Kotlin Microservices" given at the 
 * Sometimes feeling pain of paradigm shift when using Java libraries
 * Sometimes missing out some Java tools (proper coverage metrics, sonarqube like experience)
 * Sometimes missing well established coding guidelines / best practices
-
-**TBH**
-
-* Personally I'd use TestNG over Spek ;)
