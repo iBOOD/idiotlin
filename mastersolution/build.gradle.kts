@@ -3,6 +3,7 @@ import io.gitlab.arturbosch.detekt.Detekt
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 repositories {
+    mavenCentral()
     jcenter()
 }
 
@@ -37,6 +38,8 @@ dependencies {
     testImplementation("org.testng:testng:${Versions.testng}")
     testImplementation("com.willowtreeapps.assertk:assertk-jvm:${Versions.assertk}")
     testImplementation("org.skyscreamer:jsonassert:${Versions.jsonAssert}")
+    testImplementation("io.mockk:mockk:${Versions.mockk}")
+    testImplementation("com.fasterxml.jackson.module:jackson-module-kotlin:${Versions.jackson}")
 }
 
 tasks {
