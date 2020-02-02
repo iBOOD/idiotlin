@@ -1,9 +1,0 @@
-### Gradle ###
-.gradle
-/build/
-/buildSrc/build/
-!gradle/wrapper/gradle-wrapper.jar
-
-### IntelliJ IDEA ###
-.idea
-out
