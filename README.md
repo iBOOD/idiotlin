@@ -10,7 +10,7 @@ You will find the code which was produced during the talk in the `execution/` di
 * [Kodein](https://kodein.org/) ... Dependency Injection (Spring Framework)
 * [kotlin-serialization](https://github.com/Kotlin/kotlinx.serialization) ... JSON serializer (Jackson/Gson)
 * [Exposed](https://github.com/JetBrains/Exposed) ... Persistence Manager (JPA, Hibernate)
-* ~~[Spek](https://www.spekframework.org/)~~ [TestNG](https://testng.org)* ... Test Framework (JUnit/TestNG)
+* ~~[Spek](https://www.spekframework.org/)~~ (*) [TestNG](https://testng.org) ... Test Framework (JUnit/TestNG)
 * [kotlin-logging](https://github.com/MicroUtils/kotlin-logging) ... Logging Facade (Slf4j)
 * [Detekt](https://github.com/arturbosch/detekt) ... Static Code Analysis (Checkstyle)
 * Gradle Kotlin-DSL
@@ -48,4 +48,4 @@ What else could have been done to make this demo a full fledged application:
 * Sometimes feeling pain of paradigm shift when using Java libraries
 * Sometimes missing out some Java tools (proper coverage metrics, sonarqube like experience)
 * Sometimes missing well established coding guidelines / best practices
-* * Spek just doesn't really felt right for me, although "pure" Kotlinish, I still decided to go for good old TestNG (better fit than JUnit)
+* (*) Spek just doesn't really felt right for me, although "pure" Kotlinish, I still decided to go for good old TestNG (better fit than JUnit)
