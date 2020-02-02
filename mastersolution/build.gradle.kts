@@ -15,7 +15,7 @@ plugins {
 }
 
 application {
-    mainClassName = "idiotlin.App"
+    mainClassName = "idiotlinMaster.App"
 }
 
 dependencies {

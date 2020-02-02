@@ -1,4 +1,4 @@
-package idiotlin
+package idiotlinMaster
 
 import assertk.assertThat
 import assertk.assertions.isEqualTo
@@ -14,25 +14,19 @@ import org.testng.annotations.Test
 @Test
 class KtorTest {
 
-    private val model = Model("test model")
+    private val model = Model.any()
 
-    fun `When get root endpoint Then return 200 ok`() {
+    fun `When get root endpoint Then return 200 OK and JSON`() {
         withTestApplication({
-            startUp(Kodein {
+            ktor(Kodein {
                 extend(kodein())
                 bind<Service>(overrides = true) with instance(TestableService(listOf(model)))
             })
         }) {
             with(handleRequest(HttpMethod.Get, "/")) {
                 assertThat(response.status()).isEqualTo(HttpStatusCode.OK)
-                assertThat(response).contentEqualsJson(("""{"models": [{"name":"${model.name}"}]}"""))
+                assertThat(response.content).isEqualJsonArray(("""[{"name":"${model.name}"}]"""))
             }
         }
     }
-}
-
-class TestableService(
-    private val models: List<Model>
-) : Service {
-    override fun readAll() = models
 }
